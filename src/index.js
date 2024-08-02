@@ -1,6 +1,6 @@
 import "./reset.css";
 import "./base.scss";
-import "./static/home.png";
+import "./static/home-mobile.png";
 
 window.addEventListener("load", function () {
     const body = document.querySelector("body");

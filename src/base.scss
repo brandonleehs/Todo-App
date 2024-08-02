@@ -49,6 +49,8 @@ $fw-bold: 700;
 }
 
 body {
+    --padding: 2rem;
+
     background-color: var(--clr-neutral-100);
     color: var(--clr-neutral-600);
     font-size: $fs-400;
@@ -97,7 +99,6 @@ a {
 }
 
 .navbar {
-    --padding: 2rem;
     --layout-gap: 2rem;
     --content-gap: 1rem;
 
@@ -130,8 +131,8 @@ a {
 }
 
 .home {
-    --padding-sm: 2rem;
-    --padding: 2rem 4rem;
+    --home-padding-sm: var(--padding);
+    --home-padding: var(--padding) calc(var(--padding) * 2);
     --layout-gap: 2rem;
 
     display: flex;
@@ -139,7 +140,7 @@ a {
     flex-direction: row-reverse;
 
     &__content {
-        padding: var(--padding);
+        padding: var(--home-padding);
         gap: var(--layout-gap);
 
         display: grid;
@@ -147,9 +148,20 @@ a {
         text-align: center;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
         flex-direction: column;
-        padding: var(--padding-sm);
+
+        &__content {
+            padding: var(--home-padding-sm);
+        }
+    }
+
+    picture {
+        margin-inline: var(--padding);
+
+        box-shadow: rgba(0, 0, 0, .25) 0px 14px 28px, rgba(0, 0, 0, .22) 0px 5px 5px;
+        border-radius: 3rem;
+        overflow: hidden;
     }
 
     &__hero {
@@ -161,7 +173,7 @@ a {
         width: fit-content;
         padding: 1rem 3rem;
         border-radius: 99rem;
-        box-shadow: rgba(0, 0, 0, .25) 0px 14px 28px, rgba(0, 0, 0, .22) 0px 5px 5px;
+        box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         border: 0;
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
         cursor: pointer;
@@ -171,8 +183,6 @@ a {
 }
 
 .contact {
-    --padding: 2rem;
-
     padding: var(--padding);
     font-weight: $fw-bold;
     display: inline-flex;
@@ -185,9 +195,15 @@ a {
 }
 
 .sidebar__toggle {
+    --toggle-padding: var(--padding);
+
+    @media only screen and (max-width: 630px) {
+        --toggle-padding: 1rem;
+    }
+
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: var(--toggle-padding);
+    right: var(--toggle-padding);
     border: 0;
     padding: 0;
     cursor: pointer;
