@@ -1,0 +1,55 @@
+@use "mixins.scss";
+@use "fonts.scss" as *;
+
+.home {
+    --home-padding-sm: var(--padding);
+    --home-padding: var(--padding) calc(var(--padding) * 2);
+    --layout-gap: 2rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    &__content {
+        padding: var(--home-padding);
+        gap: var(--layout-gap);
+
+        display: grid;
+        place-items: center;
+        text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+
+        &__content {
+            padding: var(--home-padding-sm);
+        }
+    }
+
+    picture {
+        margin-inline: var(--padding);
+
+        box-shadow: rgba(0, 0, 0, .25) 0px 14px 28px, rgba(0, 0, 0, .22) 0px 5px 5px;
+        border-radius: 3rem;
+        overflow: hidden;
+        max-height: 630px;
+    }
+
+    &__hero {
+        font-size: $fs-900;
+        font-weight: $fw-bold;
+    }
+
+    &__start {
+        width: fit-content;
+        padding: 1rem 3rem;
+        border-radius: 99rem;
+        box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        border: 0;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+        cursor: pointer;
+
+        @include mixins.button-state-styles(&);
+    }
+}

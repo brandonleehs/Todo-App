@@ -1,0 +1,100 @@
+@use "mixins.scss";
+@use "fonts.scss" as *;
+
+.sidebar__toggle {
+    --toggle-padding: var(--padding);
+
+    @media only screen and (max-width: 630px) {
+        --toggle-padding: 1rem;
+    }
+
+    position: absolute;
+    top: var(--toggle-padding);
+    right: var(--toggle-padding);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+
+    svg {
+        fill: var(--clr-neutral-500);
+    }
+}
+
+.sidebar {
+    --layout-gap: 1rem;
+    --content-padding: .25rem 0;
+    --padding: 1rem;
+    --width: 240px;
+
+    background-color: var(--clr-neutral-200);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: var(--width);
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+
+    &.hide {
+        transform: translateX(-100%);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--layout-gap);
+        padding: var(--padding);
+        width: 100%;
+        height: 100%;
+    }
+
+    &__close {
+        border: 0;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0;
+
+        @include mixins.button-state-styles(&);
+    }
+
+    [class*="title"] {
+        font-weight: $fw-bold;
+    }
+
+    &__title {
+        font-size: $fs-700;
+        text-align: center;
+    }
+
+    &__add {
+        display: grid;
+    }
+
+    &__add button {
+        color: inherit;
+        border: 0;
+        display: inline-flex;
+        gap: .5rem;
+        align-items: center;
+        padding: var(--content-padding);
+        cursor: pointer;
+    }
+
+    &__projects>*,
+    &__tasks>* {
+        padding: var(--content-padding);
+    }
+
+    li {
+        position: relative;
+
+        &::after {
+            content: url("./static/delete.svg");
+            position: absolute;
+            right: 1rem;
+        }
+    }
+}

@@ -1,4 +1,9 @@
-@use 'sass:color';
+@use "sass:color";
+@use "sidebar.scss";
+@use "navbar.scss";
+@use "home.scss";
+@use "mixins.scss";
+@use "fonts.scss" as *;
 
 $fs-300: .825rem;
 $fs-400: 1.2rem;
@@ -9,7 +14,6 @@ $fw-regular: 400;
 $fw-bold: 700;
 
 :root {
-
     --clr-primary-100: #eef2f3;
     --clr-primary-200: #cdd7dc;
     --clr-primary-300: #acbcc4;
@@ -54,7 +58,6 @@ body {
     background-color: var(--clr-neutral-100);
     color: var(--clr-neutral-600);
     font-size: $fs-400;
-    min-height: 100vh;
 
     transition: margin-left 0.3s ease-in-out;
 
@@ -71,21 +74,9 @@ body {
 }
 
 button {
+    border: 0;
     background-color: transparent;
-}
-
-@mixin button-state-styles($button) {
-    @media (hover:hover) {
-        @at-root #{$button}:hover {
-            color: var(--clr-neutral-50);
-            outline: 2px solid var(--clr-primary-400);
-            background-color: var(--clr-primary-200);
-        }
-    }
-
-    @at-root #{$button}:active {
-        background-color: var(--clr-primary-300);
-    }
+    cursor: pointer;
 }
 
 ul {
@@ -96,90 +87,6 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-.navbar {
-    --layout-gap: 2rem;
-    --content-gap: 1rem;
-
-    display: flex;
-    gap: var(--layout-gap);
-    padding: var(--padding);
-    align-items: center;
-    font-weight: $fw-bold;
-
-    @media (max-width: 530px) {
-        & {
-            gap: 0;
-            flex-direction: column;
-        }
-    }
-
-    &__title {
-        font-size: $fs-900;
-    }
-
-    ul {
-        display: flex;
-        font-size: $fs-700;
-        gap: var(--content-gap);
-
-        a:hover {
-            color: var(--clr-primary-400);
-        }
-    }
-}
-
-.home {
-    --home-padding-sm: var(--padding);
-    --home-padding: var(--padding) calc(var(--padding) * 2);
-    --layout-gap: 2rem;
-
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-
-    &__content {
-        padding: var(--home-padding);
-        gap: var(--layout-gap);
-
-        display: grid;
-        place-items: center;
-        text-align: center;
-    }
-
-    @media (max-width: 1024px) {
-        flex-direction: column;
-
-        &__content {
-            padding: var(--home-padding-sm);
-        }
-    }
-
-    picture {
-        margin-inline: var(--padding);
-
-        box-shadow: rgba(0, 0, 0, .25) 0px 14px 28px, rgba(0, 0, 0, .22) 0px 5px 5px;
-        border-radius: 3rem;
-        overflow: hidden;
-    }
-
-    &__hero {
-        font-size: $fs-900;
-        font-weight: $fw-bold;
-    }
-
-    &__start {
-        width: fit-content;
-        padding: 1rem 3rem;
-        border-radius: 99rem;
-        box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-        border: 0;
-        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-        cursor: pointer;
-
-        @include button-state-styles(&);
-    }
 }
 
 .contact {
@@ -194,100 +101,34 @@ a {
     }
 }
 
-.sidebar__toggle {
-    --toggle-padding: var(--padding);
+.inbox {
+    min-height: 65vh;
+    display: grid;
+    justify-items: center;
 
-    @media only screen and (max-width: 630px) {
-        --toggle-padding: 1rem;
+    &__project {
+        width: 75%;
+        text-align: center;
+        // refactor
+        background-color: rgb(205, 215, 220, .4);
+        border-radius: 1rem;
     }
 
-    position: absolute;
-    top: var(--toggle-padding);
-    right: var(--toggle-padding);
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-
-    svg {
-        fill: var(--clr-neutral-500);
-    }
-}
-
-.sidebar {
-    --layout-gap: 1rem;
-    --content-padding: .25rem 0;
-    --padding: 1rem;
-    --width: 240px;
-
-    background-color: var(--clr-neutral-200);
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    transform: none;
-    width: var(--width);
-    overflow: hidden;
-    height: 100%;
-    transition: transform 0.3s ease-in-out, margin-left 0.3s ease-in-out;
-
-    &.hide {
-        transform: translateX(-100%);
-    }
-
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: var(--layout-gap);
-        padding: var(--padding);
-        width: 100%;
-        height: 100%;
-    }
-
-    &__close {
-        border: 0;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        padding: 0;
-
-        @include button-state-styles(&);
-    }
-
-    [class*="title"] {
+    &__project-title {
+        font-size: $fs-700;
         font-weight: $fw-bold;
     }
 
-    &__title {
-        font-size: $fs-700;
-        text-align: center;
-    }
-
-    &__add {
-        display: grid;
-    }
-
-    &__add button {
-        color: inherit;
-        border: 0;
+    &__task {
+        border-top: 2px solid var(--clr-neutral-500);
         display: inline-flex;
-        gap: .5rem;
         align-items: center;
-        padding: var(--content-padding);
-        cursor: pointer;
-    }
+        gap: .5rem;
 
-    &__projects>*,
-    &__tasks>* {
-        padding: var(--content-padding);
-    }
+        button svg {
+            fill: var(--clr-neutral-500);
 
-    li {
-        position: relative;
-
-        &::after {
-            content: url("./static/delete.svg");
-            position: absolute;
-            right: 1rem;
+            @include mixins.button-state-styles(&);
         }
     }
 }

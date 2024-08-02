@@ -1,0 +1,31 @@
+@use "fonts.scss" as *;
+
+.navbar {
+    --layout-gap: 2rem;
+    --content-gap: 1rem;
+
+    display: flex;
+    gap: var(--layout-gap);
+    padding: var(--padding);
+    align-items: center;
+    font-weight: $fw-bold;
+
+    @media (max-width: 530px) {
+        & {
+            gap: 0;
+            flex-direction: column;
+        }
+    }
+
+    &__title {
+        font-size: $fs-900;
+    }
+
+    ul {
+        display: flex;
+        font-size: $fs-700;
+        gap: var(--content-gap);
+
+        a:hover {}
+    }
+}

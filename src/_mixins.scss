@@ -1,0 +1,13 @@
+@mixin button-state-styles($button) {
+    @media (hover:hover) {
+        @at-root #{$button}:hover {
+            color: var(--clr-neutral-50);
+            outline: 2px solid var(--clr-primary-400);
+            background-color: var(--clr-primary-200);
+        }
+    }
+
+    @at-root #{$button}:active {
+        background-color: var(--clr-primary-300);
+    }
+}
