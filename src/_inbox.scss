@@ -1,0 +1,36 @@
+@use "mixins.scss";
+@use "fonts.scss" as *;
+
+.inbox {
+    min-height: 65vh;
+    display: grid;
+    justify-items: center;
+
+    &__project {
+        width: 75%;
+        text-align: center;
+        // refactor
+        background-color: rgb(205, 215, 220, .4);
+        border-radius: 1rem;
+    }
+
+    &__project-title {
+        font-size: $fs-700;
+        font-weight: $fw-bold;
+    }
+
+    &__task {
+        border-top: 2px solid var(--clr-neutral-500);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        width: 100%;
+
+        button svg {
+            fill: var(--clr-neutral-500);
+
+            @include mixins.button-state-styles(&);
+        }
+    }
+}

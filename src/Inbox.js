@@ -18,6 +18,9 @@ export default class Inbox {
         this.#closeButton = document.querySelector(".sidebar__close");
         this.#sidebar = document.querySelector(".sidebar");
         this.#addEventListeners();
+        if (window.vw > 992) {
+            document.querySelector(".sidebar__toggle").click();
+        }
     }
 
     #createContent() {
@@ -71,7 +74,7 @@ export default class Inbox {
                             <path
                                 d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                         </svg></button>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eveniet vitae culpa vel libero,
+                    Go running
                 </li>
             </ul>`;
         inbox.insertAdjacentHTML("afterbegin", sidebarHTML);
