@@ -1,5 +1,4 @@
-@use "mixins.scss";
-@use "fonts.scss" as *;
+@use "../abstracts" as *;
 
 .home {
     --home-padding-sm: var(--padding);
@@ -49,6 +48,6 @@
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
         cursor: pointer;
 
-        @include mixins.button-state-styles(&);
+        @include button-state-styles(&);
     }
 }

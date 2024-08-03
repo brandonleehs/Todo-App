@@ -1,5 +1,4 @@
-@use "mixins.scss";
-@use "fonts.scss" as *;
+@use "../abstracts" as *;
 
 .sidebar__toggle {
     --toggle-padding: var(--padding);
@@ -56,7 +55,7 @@
         right: 1rem;
         padding: 0;
 
-        @include mixins.button-state-styles(&);
+        @include button-state-styles(&);
     }
 
     [class*="title"] {

@@ -1,48 +1,5 @@
-@use "sass:color";
-@use "sidebar.scss";
-@use "navbar.scss";
-@use "home.scss";
-@use "mixins.scss";
-@use "inbox.scss";
-@use "fonts.scss" as *;
-
-$fs-300: .825rem;
-$fs-400: 1.2rem;
-$fs-700: 1.5rem;
-$fs-900: 3rem;
-
-$fw-regular: 400;
-$fw-bold: 700;
-
-:root {
-    --clr-primary-100: #eef2f3;
-    --clr-primary-200: #cdd7dc;
-    --clr-primary-300: #acbcc4;
-    --clr-primary-400: #8ba1ad;
-    --clr-primary-500: #6a8695;
-    --clr-primary-600: #526874;
-    --clr-primary-700: #3b4b53;
-    --clr-primary-800: #232d32;
-    --clr-primary-900: #0c0f11;
-
-    --clr-neutral-50: white;
-    --clr-neutral-100: #f3f4f6;
-    --clr-neutral-200: #e5e7eb;
-    --clr-neutral-300: #d1d5db;
-    --clr-neutral-400: #9ca3af;
-    --clr-neutral-500: #6b7280;
-    --clr-neutral-600: #4b5563;
-    --clr-neutral-700: #374151;
-    --clr-neutral-800: #1f2937;
-    --clr-neutral-900: #111827;
-}
-
-.dark-theme {
-    --clr-primary-400: hsl(293, 44%, 24%);
-    --clr-secondary-400: hsl(328, 49%, 37%);
-
-    --clr-neutral-400: white;
-}
+@use "abstracts" as *;
+@use "components";
 
 .no-transition,
 .no-transition * {
