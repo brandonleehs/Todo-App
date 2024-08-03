@@ -1,7 +1,9 @@
 export default class Home {
+    #controller;
     #main;
 
-    constructor() {
+    constructor(controller) {
+        this.#controller = controller;
         this.#main = document.querySelector("main");
     }
 
@@ -23,5 +25,10 @@ export default class Home {
 
     render() {
         this.#main.appendChild(this.#createContent());
+
+        document.querySelector(".home__start").addEventListener("click", () => {
+            this.#controller.refreshContent();
+            this.#controller.inbox.render();
+        });
     }
 }
