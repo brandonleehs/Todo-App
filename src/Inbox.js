@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+export default class Inbox {
+    #body;
+    #main;
+    #toggleButton;
+    #closeButton;
+    #sidebar;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskTrack</title>
-</head>
+    constructor() {
+        this.#body = document.querySelector("body");
+        this.#main = document.querySelector("main");
+        this.#getDim();
+        window.addEventListener("resize", this.#getDim);
+    }
 
-<body class="no-transition">
-    <nav class="navbar">
-        <h1 class="navbar__title">TaskTrack</h1>
-        <ul>
-            <li><a class="navbar__about" href="#">About</a></li>
-            <li><a class="navbar__inbox" href="#">Inbox</a></li>
-            <li><a class="navbar__contact" href="#">Contact</a></li>
-        </ul>
-    </nav>
-    <!-- <button type="button" class="sidebar__toggle">
+    render() {
+        this.#main.appendChild(this.#createContent());
+        this.#toggleButton = document.querySelector(".sidebar__toggle");
+        this.#closeButton = document.querySelector(".sidebar__close");
+        this.#sidebar = document.querySelector(".sidebar");
+        this.#addEventListeners();
+    }
+
+    #createContent() {
+        const sidebarHTML = `<button type="button" class="sidebar__toggle">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -53,10 +58,10 @@
                 <p class="sidebar__tasks-title">Tasks</p>
             </ul>
         </div>
-    </aside> -->
-    <main>
-        <!-- <section class="inbox">
-            <ul class="inbox__project">
+    </aside>`
+        const inbox = document.createElement("section");
+        inbox.className = "inbox";
+        inbox.innerHTML = `<ul class="inbox__project">
                 <p class="inbox__project-title">General</p>
                 <li class="inbox__task">
                     <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -68,27 +73,33 @@
                         </svg></button>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eveniet vitae culpa vel libero,
                 </li>
-            </ul>
-        </section> -->
-        <!-- <section class="home">
-            <picture>
-                <img src="./static/home-mobile.png" alt="">
-            </picture>
-            <div class="home__content">
-                <p class="home__hero">Stay Organized. Stay Productive.</p>
-                <p>Simplify your life and get more done with TaskTrack. Effortlessly manage your tasks, set priorities,
-                    and
-                    achieve your goals. Start your journey to a more organized and productive day.</p>
-                <button type="button" class="home__start">Get started</button>
-            </div>
-        </section> -->
-    </main>
+            </ul>`;
+        inbox.insertAdjacentHTML("afterbegin", sidebarHTML);
+        return inbox;
+    }
 
-    <footer><a href="#" class="contact"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                class="bi bi-envelope" viewBox="0 0 16 16">
-                <path
-                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-            </svg>Contact us!</a></footer>
-</body>
+    #getDim() {
+        window.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        window.vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    };
 
-</html>
+    #addEventListeners() {
+        const self = this; // allows us to call the class instance without using fat arrow function
+        self.#toggleButton.addEventListener("click", function (e) {
+            self.#body.classList.toggle("body--toggle");
+            self.#sidebar.classList.toggle("hide");
+        });
+        self.#closeButton.addEventListener("click", function () {
+            self.#body.classList.remove("body--toggle");
+            self.#sidebar.classList.add("hide");
+        });
+        self.#body.addEventListener("click", function (e) {
+            if (window.vw <= 992 && self.#body.classList.contains("body--toggle") && !self.#sidebar.contains(e.target)) {
+                self.#body.classList.remove("body--toggle");
+                self.#sidebar.classList.add("hide");
+                e.stopPropagation();
+            }
+        }, { capture: true });
+    }
+
+}

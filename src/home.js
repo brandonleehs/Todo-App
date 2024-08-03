@@ -1,7 +1,11 @@
 export default class Home {
-    #main = document.querySelector("main");
+    #main;
 
-    createContent() {
+    constructor() {
+        this.#main = document.querySelector("main");
+    }
+
+    #createContent() {
         const home = document.createElement("section");
         home.className = "home";
         home.innerHTML = `<picture>
@@ -18,6 +22,6 @@ export default class Home {
     }
 
     render() {
-        this.#main.appendChild(this.createContent());
+        this.#main.appendChild(this.#createContent());
     }
 }
