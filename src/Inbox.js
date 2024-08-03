@@ -1,26 +1,58 @@
 export default class Inbox {
-    #body;
-    #main;
-    #toggleButton;
-    #closeButton;
-    #sidebar;
+    #controller;
 
-    constructor() {
-        this.#body = document.querySelector("body");
-        this.#main = document.querySelector("main");
+    constructor(controller) {
+        this.#controller = controller;
         this.#getDim();
         window.addEventListener("resize", this.#getDim);
     }
 
     render() {
-        this.#main.appendChild(this.#createContent());
-        this.#toggleButton = document.querySelector(".sidebar__toggle");
-        this.#closeButton = document.querySelector(".sidebar__close");
-        this.#sidebar = document.querySelector(".sidebar");
-        this.#addEventListeners();
+        const main = document.querySelector("main");
+        main.appendChild(this.#createContent());
+        this.#bindEvents();
         if (window.vw > 992) {
             document.querySelector(".sidebar__toggle").click();
         }
+    }
+
+    #getDim() {
+        window.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        window.vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    };
+
+    #bindEvents() {
+        const self = this;
+        const body = document.querySelector("body");
+        const main = document.querySelector("main");
+        const toggleButton = document.querySelector(".sidebar__toggle");
+        const closeButton = document.querySelector(".sidebar__close");
+        const sidebar = document.querySelector(".sidebar");
+        const [addTaskButton, addProjectButton] = document.querySelectorAll(".sidebar__add button");
+
+        toggleButton.addEventListener("click", function (e) {
+            body.classList.toggle("body--toggle");
+            sidebar.classList.toggle("hide");
+        });
+        closeButton.addEventListener("click", function () {
+            body.classList.remove("body--toggle");
+            sidebar.classList.add("hide");
+        });
+        body.addEventListener("click", function (e) {
+            if (window.vw <= 992 && body.classList.contains("body--toggle") && !sidebar.contains(e.target)) {
+                body.classList.remove("body--toggle");
+                sidebar.classList.add("hide");
+                e.stopPropagation();
+            }
+        }, { capture: true });
+
+        addTaskButton.addEventListener("click", function () {
+            self.#controller.modal.render();
+            if (window.vw <= 992) {
+                sidebar.classList.add("hide");
+                body.classList.remove("body--toggle");
+            }
+        });
     }
 
     #createContent() {
@@ -79,30 +111,6 @@ export default class Inbox {
             </ul>`;
         inbox.insertAdjacentHTML("afterbegin", sidebarHTML);
         return inbox;
-    }
-
-    #getDim() {
-        window.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-        window.vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-    };
-
-    #addEventListeners() {
-        const self = this; // allows us to call the class instance without using fat arrow function
-        self.#toggleButton.addEventListener("click", function (e) {
-            self.#body.classList.toggle("body--toggle");
-            self.#sidebar.classList.toggle("hide");
-        });
-        self.#closeButton.addEventListener("click", function () {
-            self.#body.classList.remove("body--toggle");
-            self.#sidebar.classList.add("hide");
-        });
-        self.#body.addEventListener("click", function (e) {
-            if (window.vw <= 992 && self.#body.classList.contains("body--toggle") && !self.#sidebar.contains(e.target)) {
-                self.#body.classList.remove("body--toggle");
-                self.#sidebar.classList.add("hide");
-                e.stopPropagation();
-            }
-        }, { capture: true });
     }
 
 }

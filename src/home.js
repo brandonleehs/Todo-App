@@ -25,7 +25,10 @@ export default class Home {
 
     render() {
         this.#main.appendChild(this.#createContent());
+        this.#bindEvent();
+    }
 
+    #bindEvent() {
         document.querySelector(".home__start").addEventListener("click", () => {
             this.#controller.refreshContent();
             this.#controller.inbox.render();

@@ -1,34 +1,41 @@
 import Home from "./Home.js";
 import Inbox from "./Inbox.js";
+import Modal from "./Modal.js";
 
 export default class Controller {
     #currentView;
     #viewsMap;
     #home;
     #inbox;
+    #modal;
 
     constructor() {
         const homeLink = document.querySelector(".navbar__title");
         const inboxLink = document.querySelector(".navbar__inbox");
+        this.#modal = new Modal();
         this.#home = new Home(this);
-        this.#inbox = new Inbox();
+        this.#inbox = new Inbox(this);
         this.#viewsMap = new Map();
         this.#viewsMap.set(homeLink, this.#home);
         this.#viewsMap.set(inboxLink, this.#inbox);
-        this.#currentView = this.#viewsMap.get(homeLink);
-        this.#addEventListeners();
-        this.#currentView.render();
+
+        this.#renderDefault();
         this.#enableTransitions();
     }
 
-    #addEventListeners() {
+    #renderDefault() {
+        this.#currentView = this.#home;
+        this.#currentView.render();
+        this.#bindEvents();
+    }
+
+    #bindEvents() {
         for (const [link, view] of this.#viewsMap) {
             link.addEventListener("click", () => {
-                const targetView = this.#viewsMap.get(link);
-                if (this.#currentView != targetView) {
+                if (this.#currentView != view) {
                     this.refreshContent();
-                    targetView.render();
-                    this.#currentView = targetView;
+                    view.render();
+                    this.#currentView = view;
                 }
             });
         }
@@ -54,5 +61,9 @@ export default class Controller {
     }
     get inbox() {
         return this.#inbox;
+    }
+
+    get modal() {
+        return this.#modal;
     }
 }
