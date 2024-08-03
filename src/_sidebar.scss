@@ -22,7 +22,7 @@
 
 .sidebar {
     --layout-gap: 1rem;
-    --content-padding: .25rem 0;
+    --content-padding: .25rem;
     --padding: 1rem;
     --width: 240px;
 
@@ -79,6 +79,19 @@
         align-items: center;
         padding: var(--content-padding);
         cursor: pointer;
+
+        @media (hover:hover) {
+            &:hover {
+                border-radius: .5rem;
+                outline: 2px solid var(--clr-primary-400);
+                background-color: var(--clr-primary-200);
+            }
+        }
+
+        &:active {
+            font-weight: $fw-bold;
+            background-color: var(--clr-primary-300);
+        }
     }
 
     &__projects>*,
