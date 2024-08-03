@@ -27,6 +27,8 @@
         font-size: $fs-700;
         gap: var(--content-gap);
 
-        a:hover {}
+        li a:hover {
+            color: var(--clr-primary-400);
+        }
     }
 }
