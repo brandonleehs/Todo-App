@@ -1,10 +1,16 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default class Project {
     #title;
     #description;
+    #taskArr;
+    #id;
 
-    constructor(title) {
+    constructor(title, description) {
         this.#title = title;
-        this.#description;
+        this.#description = description;
+        this.#taskArr = [];
+        this.#id = uuidv4();
     }
 
     get title() {
@@ -13,5 +19,22 @@ export default class Project {
 
     get description() {
         return this.#description;
+    }
+
+    get taskArr() {
+        return this.#taskArr;
+    }
+
+    get id() {
+        return this.#id;
+    }
+
+    toJSON() {
+        return {
+            title: this.title,
+            description: this.description,
+            taskArr: this.taskArr,
+            id: this.id,
+        };
     }
 }

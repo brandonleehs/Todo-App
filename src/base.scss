@@ -10,13 +10,16 @@
     transition: none !important;
 }
 
+.body--inbox {
+    transition: margin-left 0.3s ease-in-out;
+}
+
 body {
     --padding: 2rem;
 
     background-color: var(--clr-neutral-100);
     color: var(--clr-neutral-600);
     font-size: $fs-400;
-    transition: margin-left 0.3s ease-in-out;
 
     &.body--toggle {
         margin-left: 240px;

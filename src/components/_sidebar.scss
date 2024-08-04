@@ -1,5 +1,20 @@
 @use "../abstracts" as *;
 
+@mixin sidebar-button-styles {
+    @media (hover:hover) {
+        &:hover {
+            border-radius: .5rem;
+            outline: 2px solid var(--clr-primary-400);
+            background-color: var(--clr-primary-200);
+        }
+    }
+
+    &:active {
+        font-weight: $fw-bold;
+        background-color: var(--clr-primary-300);
+    }
+}
+
 .sidebar__toggle {
     --toggle-padding: var(--padding);
 
@@ -79,18 +94,7 @@
         padding: var(--content-padding);
         cursor: pointer;
 
-        @media (hover:hover) {
-            &:hover {
-                border-radius: .5rem;
-                outline: 2px solid var(--clr-primary-400);
-                background-color: var(--clr-primary-200);
-            }
-        }
-
-        &:active {
-            font-weight: $fw-bold;
-            background-color: var(--clr-primary-300);
-        }
+        @include sidebar-button-styles;
     }
 
     &__projects>*,
@@ -99,12 +103,12 @@
     }
 
     li {
+        cursor: pointer;
         position: relative;
 
-        &::after {
-            content: url("./static/delete.svg");
-            position: absolute;
-            right: 1rem;
-        }
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        @include sidebar-button-styles;
     }
 }

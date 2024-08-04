@@ -20,5 +20,8 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "uuid": "^10.0.0"
   }
 }

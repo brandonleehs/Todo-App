@@ -1,5 +1,19 @@
 @use "../abstracts" as *;
 
+@mixin modal-button-style($clr-hover, $clr-active, $outline) {
+    @media (hover:hover) {
+        @at-root &:hover {
+            color: var(--clr-neutral-50);
+            background-color: $clr-hover;
+        }
+    }
+
+    @at-root &:active {
+        outline: $outline;
+        background-color: $clr-active;
+    }
+}
+
 .blur {
     font-size: 1rem;
     position: fixed;
@@ -14,7 +28,7 @@
     --gap: .5rem;
     --input-border-radius: 1rem;
     --input-padding: .25rem 1rem;
-
+    display: block;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -44,6 +58,11 @@
         border-radius: var(--input-border-radius);
     }
 
+    textarea {
+        padding: 1rem;
+        border: 1px solid;
+    }
+
     label {
         font-size: $fs-300;
         text-transform: uppercase;
@@ -56,20 +75,34 @@
         gap: .5rem;
     }
 
-    &__add,
-    &__cancel {
-        font-weight: bold;
-        text-transform: uppercase;
-        // fix styles
-        @include button-state-styles(&);
-    }
-
     &__add {
-        background-color: var(--clr-primary-600);
+        --clr-hover: var(--clr-primary-600);
+        --clr-active: var(--clr-primary-750);
+        --outline: 2px solid var(--clr-primary-400);
+
+        background-color: var(--clr-primary-500);
         color: var(--clr-neutral-50);
     }
 
     &__cancel {
+        --clr-hover: var(--clr-neutral-400);
+        --clr-active: var(--clr-neutral-500);
+        --outline: 2px solid var(--clr-neutral-400);
+
         background-color: var(--clr-neutral-300);
     }
+
+    &__add,
+    &__cancel {
+        $clr-hover: var(--clr-hover);
+        $clr-active: var(--clr-active);
+        $outline: var(--outline);
+
+        font-weight: bold;
+        text-transform: uppercase;
+
+        @include modal-button-style($clr-hover, $clr-active, $outline);
+    }
+
+
 }
