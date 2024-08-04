@@ -52,6 +52,12 @@ export default class Modal {
         cancelButton.addEventListener("click", () => {
             document.querySelector(".blur").remove();
         })
+
+        document.addEventListener("keydown", ({ key }) => {
+            if (key === "Escape") {
+                document.querySelector(".blur").remove();
+            }
+        }, { once: true })
     }
 
     #addProject() {
