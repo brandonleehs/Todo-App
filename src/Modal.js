@@ -6,8 +6,10 @@ import Event from "./Event.js";
 export default class Modal {
     #body;
     #controller;
+    #date;
 
     constructor(controller) {
+        this.#date = this.#getCurrentDate();
         this.#controller = controller;
         this.#body = document.querySelector("body");
     }
@@ -25,18 +27,23 @@ export default class Modal {
         modal.showModal();
     }
 
-    #bindEvents(id) {
+    #bindEvents(type, id) {
         const addButton = document.querySelector(".modal__add");
         const cancelButton = document.querySelector(".modal__cancel");
 
         addButton && addButton.addEventListener("click", (e) => {
             if (id) DBManager.deleteById(id);
-            e.preventDefault();
-            this.#addTask();
-            Event.emit("itemChanged");
-            document.querySelector(".blur").remove();
+            if (this.#checkValidation()) {
+                if (type === "task") {
+                    this.#addTask();
+                } else {
+                    this.#addProject();
+                }
+                e.preventDefault();
+                Event.emit("itemChanged");
+                document.querySelector(".blur").remove();
+            }
         });
-
 
         // might need to remove event listener to prevent stacking?
 
@@ -50,6 +57,16 @@ export default class Modal {
                 blur.remove();
             }
         });
+    }
+
+    #checkValidation() {
+        const selectors = `.modal__form [id*="title"]`;
+        const values = Array.from(document.querySelectorAll(selectors)).map(el => el.value);
+
+        for (const value of values) {
+            if (!value) return false;
+        }
+        return true;
     }
 
     #addProject() {
@@ -259,7 +276,7 @@ export default class Modal {
                 <input type="text" name="task-Title" id="task-title" maxlength="40" required />
 
                 <label for="duedate">Duedate</label>
-                <input type="date" id="duedate" name="duedate" value="2024-08-03" min="2024-08-03" max="2030-01-01" />
+                <input type="date" id="duedate" name="duedate" value="${this.#date}" min="2024-01-01" max="2030-01-01" />
 
                 <label for="priority">Priority
                     <select name="priority" id="priority">
@@ -278,5 +295,9 @@ export default class Modal {
             </form>
         </dialog>`;
         return blur;
+    }
+
+    #getCurrentDate() {
+        return new Date().toISOString().split('T')[0]
     }
 }
