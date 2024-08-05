@@ -96,6 +96,10 @@
         cursor: pointer;
 
         @include sidebar-button-styles;
+
+        svg {
+            fill: var(--clr-neutral-600);
+        }
     }
 
     &__projects>*,
