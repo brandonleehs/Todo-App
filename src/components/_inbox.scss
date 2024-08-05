@@ -53,6 +53,7 @@
 
         display: flex;
         gap: var(--content-gap);
+        align-items: center;
 
         span {
             text-overflow: ellipsis;
