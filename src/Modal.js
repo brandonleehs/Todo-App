@@ -49,15 +49,18 @@ export default class Modal {
             throw new Error("UNDEFINED TYPE");
         }
 
+        // might need to remove event listener to prevent stacking?
+
         cancelButton.addEventListener("click", () => {
             document.querySelector(".blur").remove();
-        })
+        });
 
         document.addEventListener("keydown", ({ key }) => {
-            if (key === "Escape") {
-                document.querySelector(".blur").remove();
+            const blur = document.querySelector(".blur");
+            if (key === "Escape" && blur) {
+                blur.remove();
             }
-        }, { once: true })
+        });
     }
 
     #addProject() {

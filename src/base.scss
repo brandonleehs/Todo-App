@@ -10,12 +10,11 @@
     transition: none !important;
 }
 
-.body--inbox {
-    transition: margin-left 0.3s ease-in-out;
-}
+
 
 body {
     --padding: 2rem;
+    --overlay: rgba(0, 0, 0, 0.4);
 
     background-color: var(--clr-neutral-100);
     color: var(--clr-neutral-600);
@@ -25,10 +24,24 @@ body {
         margin-left: 240px;
     }
 
+    &.body--inbox {
+        transition: margin-left 0.3s ease-in-out;
+    }
+
     @media only screen and (max-width: 992px) {
         &.body--toggle {
             margin-left: 0;
-            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        &.body--toggle::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: var(--overlay);
         }
     }
 }
