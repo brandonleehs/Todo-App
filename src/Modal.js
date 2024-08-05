@@ -94,6 +94,8 @@ export default class Modal {
         throw new Error("UNDEFINED TYPE");
     }
 
+    // tabindex 0 on the form prevents autofocus on first input
+
     #editTask(id) {
         const blur = document.createElement("div");
         const arr = DBManager.read("projects");
@@ -108,7 +110,7 @@ export default class Modal {
         blur.className = "blur";
         // might wanna add date
         blur.innerHTML = `<dialog class="modal">
-            <form action="POST" class="modal__form">
+            <form action="POST" class="modal__form" tabindex="0">
                 <p class="modal__title">Edit Task</p>
                 <label for="projects">Project</label>
                 <select name="projects" id="projects" value="">
@@ -145,7 +147,7 @@ export default class Modal {
 
         blur.className = "blur";
         blur.innerHTML = `<dialog class="modal">
-        <form action="" class="modal__form">
+        <form action="" class="modal__form" tabindex="0">
             <p class="modal__title">Edit Project</p>
 
             <label for="project-title">Title</label>
@@ -165,7 +167,7 @@ export default class Modal {
         const blur = document.createElement("div");
         blur.className = "blur";
         blur.innerHTML = `<dialog class="modal">
-        <form action="" class="modal__form">
+        <form action="" class="modal__form" tabindex="0">
             <p class="modal__title">New Project</p>
 
             <label for="project-title">Title</label>
@@ -192,7 +194,7 @@ export default class Modal {
 
         blur.className = "blur";
         blur.innerHTML = `<dialog class="modal">
-            <form action="POST" class="modal__form">
+            <form action="POST" class="modal__form" tabindex="0">
                 <p class="modal__title">New Task</p>
                 <label for="projects">Project</label>
                 <select name="projects" id="projects">
