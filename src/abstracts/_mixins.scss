@@ -11,3 +11,9 @@
         background-color: var(--clr-primary-300);
     }
 }
+
+@mixin priority-style($priority) {
+    &--priority-#{$priority} {
+        border-left: 6px solid var(--clr-priority-#{$priority});
+    }
+}

@@ -41,6 +41,7 @@ export default class Inbox {
         const toggleButton = document.querySelector(".sidebar__toggle");
         const closeButton = document.querySelector(".sidebar__close");
         const sidebar = document.querySelector(".sidebar");
+        const sidebarLi = document.querySelectorAll(".sidebar li[data-id]")
         const [addTaskButton, addProjectButton] = document.querySelectorAll(".sidebar__add button");
         const checkButtonList = document.querySelectorAll(".inbox__check");
         const infoButtonList = document.querySelectorAll(".inbox__info");
@@ -97,6 +98,22 @@ export default class Inbox {
                 }
             });
         }
+
+        for (const li of sidebarLi) {
+            li.addEventListener("click", function () {
+                const id = li.getAttribute("data-id");
+
+                if (DBManager.getId(id).project) {
+                    self.#controller.modal.render("task", id, true);
+                } else {
+                    self.#controller.modal.render("project", id, true);
+                }
+                if (window.vw <= 992) {
+                    sidebar.classList.add("hide");
+                    body.classList.remove("body--toggle");
+                }
+            });
+        }
     }
 
     #populate() {
@@ -108,6 +125,7 @@ export default class Inbox {
             const li = document.createElement("li");
 
             li.textContent = project.title;
+            li.setAttribute("data-id", project.id);
             p.className = "inbox__project-title";
             p.textContent = project.title;
             p.setAttribute("data-id", project.id);
@@ -117,20 +135,17 @@ export default class Inbox {
 
         const tasks = DBManager.read("tasks");
 
-        `<ul class="sidebar__tasks">
-                <p class="sidebar__tasks-title">Tasks</p>
-            </ul>`;
-
         for (const task of tasks) {
             const sidebarTasks = document.querySelector(".sidebar__tasks");
             const sidebarLi = document.createElement("li");
 
             sidebarLi.textContent = task.title;
+            sidebarLi.setAttribute("data-id", task.id);
             sidebarTasks.appendChild(sidebarLi);
 
             const inboxLi = document.createElement("li");
 
-            inboxLi.className = "inbox__task";
+            inboxLi.className = `inbox__task inbox__task--priority-${task.priority}`;
             inboxLi.setAttribute("data-id", task.id);
             inboxLi.innerHTML = `
 <div class="inbox__buttons">
@@ -151,7 +166,7 @@ export default class Inbox {
             span.textContent = task.title;
             div.appendChild(span);
             inboxLi.insertBefore(div, inboxLi.firstChild);
-            document.querySelector(`[data-id="${task.project}"]`).insertAdjacentElement("afterend", inboxLi);
+            document.querySelector(`.inbox__project [data-id="${task.project}"]`).insertAdjacentElement("afterend", inboxLi);
         }
     }
 

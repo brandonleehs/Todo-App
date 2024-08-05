@@ -3,7 +3,6 @@
 @mixin sidebar-button-styles {
     @media (hover:hover) {
         &:hover {
-            border-radius: .5rem;
             outline: 2px solid var(--clr-primary-400);
             background-color: var(--clr-primary-200);
         }
@@ -39,6 +38,7 @@
     --content-padding: .25rem;
     --padding: 1rem;
     --width: 240px;
+    --border-radius: .5rem;
 
     background-color: var(--clr-neutral-200);
     position: fixed;
@@ -92,6 +92,7 @@
         gap: .5rem;
         align-items: center;
         padding: var(--content-padding);
+        border-radius: var(--border-radius);
         cursor: pointer;
 
         @include sidebar-button-styles;
@@ -109,6 +110,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        border-radius: var(--border-radius);
         @include sidebar-button-styles;
     }
 }

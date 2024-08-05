@@ -38,7 +38,6 @@
 }
 
 .inbox__task {
-
     border-radius: 1rem;
     padding: var(--padding);
     background-color: var(--clr-primary-200);
@@ -71,5 +70,8 @@
         min-width: 1rem;
     }
 
-
+    @include priority-style("none");
+    @include priority-style("low");
+    @include priority-style("medium");
+    @include priority-style("high");
 }

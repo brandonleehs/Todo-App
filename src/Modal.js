@@ -12,42 +12,31 @@ export default class Modal {
         this.#body = document.querySelector("body");
     }
 
-    render(type, id) {
-        this.#body.appendChild(this.#createContent(type, id));
-        if (id) {
-            const item = DBManager.getId(id);
+    render(type, id, view) {
+        this.#body.appendChild(this.#createContent(type, id, view));
+        const item = DBManager.getId(id);
+        if (id && item.priority) {
             const selected = document.querySelector(`#priority option[value="${item.priority}"]`);
             selected.setAttribute("selected", "");
+
         }
         this.#bindEvents(type, id);
         const modal = document.querySelector(".modal");
         modal.showModal();
     }
 
-    #bindEvents(type, id) {
+    #bindEvents(id) {
         const addButton = document.querySelector(".modal__add");
         const cancelButton = document.querySelector(".modal__cancel");
-        if (type === "task") {
-            addButton.addEventListener("click", (e) => {
-                if (id) DBManager.deleteById(id);
-                e.preventDefault();
-                this.#addTask();
-                Event.emit("itemChanged");
-                document.querySelector(".blur").remove();
-            });
-        }
-        else if (type === "project") {
-            addButton.addEventListener("click", (e) => {
-                if (id) DBManager.deleteById(id);
-                e.preventDefault();
-                this.#addProject();
-                Event.emit("itemChanged");
-                document.querySelector(".blur").remove();
-            });
-        }
-        else {
-            throw new Error("UNDEFINED TYPE");
-        }
+
+        addButton && addButton.addEventListener("click", (e) => {
+            if (id) DBManager.deleteById(id);
+            e.preventDefault();
+            this.#addTask();
+            Event.emit("itemChanged");
+            document.querySelector(".blur").remove();
+        });
+
 
         // might need to remove event listener to prevent stacking?
 
@@ -84,12 +73,14 @@ export default class Modal {
         DBManager.write("tasks", arr);
     }
 
-    #createContent(type, id) {
+    #createContent(type, id, view) {
         if (type === "task") {
+            if (view && id) return this.#viewTask(id);
             if (id) return this.#editTask(id);
             return this.#createTask();
         }
         if (type === "project") {
+            if (view && id) return this.#viewProject(id);
             if (id) return this.#editProject(id);
             return this.#createProject();
         }
@@ -98,6 +89,67 @@ export default class Modal {
     }
 
     // tabindex 0 on the form prevents autofocus on first input
+
+    #viewTask(id) {
+        const blur = document.createElement("div");
+        const arr = DBManager.read("projects");
+        let options = "";
+
+        const task = DBManager.getId(id);
+
+        for (const project of arr) {
+            options = options + `<option value="${project.id}">${project.title}</option>`;
+        }
+
+        blur.className = "blur";
+        blur.innerHTML = `<dialog class="modal">
+            <form action="POST" class="modal__form" tabindex="0">
+                <label for="projects">Project</label>
+                <select name="projects" id="projects" disabled>
+                    ${options}
+                </select>
+                <label for="task-title">Title</label>
+                <input type="text" name="task-Title" id="task-title" maxlength="40" value="${task.title}" required
+                    readonly />
+
+                <label for="duedate">Duedate</label>
+                <input type="date" id="duedate" name="duedate" value="${task.dueDate}" min="2024-08-03" max="2030-01-01"
+                    readonly />
+
+                <label for="priority">Priority
+                    <select name="priority" id="priority" disabled>
+                        <option value="none" selected>None</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </label>
+
+                <label for="note">Note:</label>
+                <textarea id="note" name="note" rows="5" cols="33" readonly>${task.description}</textarea>
+
+                <button class="modal__cancel" type="button">Close</button>
+            </form>
+        </dialog>`;
+        return blur;
+    }
+
+    #viewProject(id) {
+        const blur = document.createElement("div");
+        const project = DBManager.getId(id);
+
+        blur.className = "blur";
+        blur.innerHTML = `<dialog class="modal">
+            <form action="" class="modal__form" tabindex="0">
+                <label for="project-title">Title</label>
+                <input type="text" name="project-title" id="project-title" maxlength="40" required readonly value="${project.title}"/>
+                <label for="note">Note:</label>
+                <textarea id="note" name="note" rows="5" cols="33" readonly>${project.description}</textarea>
+                <button class="modal__cancel" type="button">Close</button>
+            </form>
+        </dialog>`;
+        return blur;
+    }
 
     #editTask(id) {
         const blur = document.createElement("div");

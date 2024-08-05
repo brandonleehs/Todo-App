@@ -14,6 +14,20 @@
     }
 }
 
+@mixin modal-priority-style($priority) {
+    label:has(option[value=#{$priority}]:checked) {
+        color: var(--clr-priority-#{$priority});
+    }
+
+    select:has(option[value=#{$priority}]:checked) {
+        outline: 1px solid var(--clr-priority-#{$priority});
+    }
+
+    option[value=#{$priority}] {
+        background-color: var(--clr-priority-#{$priority});
+    }
+}
+
 .blur {
     font-size: 1rem;
     position: fixed;
@@ -28,6 +42,7 @@
     --gap: .5rem;
     --input-border-radius: 1rem;
     --input-padding: .25rem 1rem;
+
     display: block;
     position: absolute;
     top: 50%;
@@ -57,6 +72,11 @@
         padding: var(--input-padding);
         border-radius: var(--input-border-radius);
     }
+
+    @include modal-priority-style("none");
+    @include modal-priority-style("low");
+    @include modal-priority-style("medium");
+    @include modal-priority-style("high");
 
     textarea {
         padding: 1rem;
