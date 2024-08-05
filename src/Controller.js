@@ -4,6 +4,7 @@ import Inbox from "./Inbox.js";
 import Project from "./Project.js";
 import Task from "./Task.js";
 import Modal from "./Modal.js";
+import About from "./About.js";
 
 export default class Controller {
     #currentView;
@@ -11,16 +12,20 @@ export default class Controller {
     #home;
     #inbox;
     #modal;
+    #about;
 
     constructor() {
         const homeLink = document.querySelector(".navbar__title");
         const inboxLink = document.querySelector(".navbar__inbox");
+        const aboutLink = document.querySelector(".navbar__about");
         this.#modal = new Modal(this);
         this.#home = new Home(this);
         this.#inbox = new Inbox(this);
+        this.#about = new About(this);
         this.#viewsMap = new Map();
         this.#viewsMap.set(homeLink, this.#home);
         this.#viewsMap.set(inboxLink, this.#inbox);
+        this.#viewsMap.set(aboutLink, this.#about);
 
         this.#renderDefault();
         this.#enableTransitions();

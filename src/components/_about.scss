@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+.about {
+    --layout-gap: 1rem;
+    --content-gap: .5rem;
+
+    display: grid;
+    gap: var(--layout-gap);
+    padding: var(--padding);
+
+    &__section {
+        display: grid;
+        gap: var(--content-gap);
+    }
+}
