@@ -19,8 +19,8 @@ export default class Contact {
                 </div>
 
                 <div class="contact__feedback">
-                    <label for="feedback">Let's chat.</label>
-                    <textarea id="feedback" name="feedback" rows="5" cols="33"></textarea>
+                    <label for="feedback">Let's chat!</label>
+                    <textarea id="feedback" name="feedback"></textarea>
                 </div>
 
                 <button class="contact__submit" type="submit">Submit</button>

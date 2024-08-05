@@ -42,6 +42,7 @@
         padding: var(--input-padding);
         border-radius: var(--input-border-radius);
         border: 0;
+        width: 100%;
     }
 
     input:focus,
@@ -55,11 +56,7 @@
         font-weight: $fw-bold;
     }
 
-    &__name {
-        display: flex;
-        gap: var(--content-gap);
-    }
-
+    &__name,
     &__feedback {
         display: flex;
         flex-direction: column;
