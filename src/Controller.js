@@ -37,8 +37,7 @@ export default class Controller {
     }
 
     #renderDefault() {
-        // this.#currentView = this.#home;
-        this.#currentView = this.#contact;
+        this.#currentView = this.#home;
         this.#currentView.render();
         this.#bindEvents();
 
