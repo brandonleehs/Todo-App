@@ -31,6 +31,10 @@ export default class Controller {
         this.#currentView.render();
         this.#bindEvents();
 
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.querySelector("body").classList.add("dark-theme");
+        }
+
         this.#seed();
     }
 

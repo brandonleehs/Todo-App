@@ -53,6 +53,7 @@
     border-width: 1px;
     border-radius: 1rem;
     padding: 1rem;
+    color: var(--clr-neutral-600);
 
     &__form {
         display: grid;
@@ -118,6 +119,7 @@
         $clr-active: var(--clr-active);
         $outline: var(--outline);
 
+        color: inherit;
         font-weight: bold;
         text-transform: uppercase;
 
