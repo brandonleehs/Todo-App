@@ -3,12 +3,12 @@
         @at-root #{$button}:hover {
             color: var(--clr-neutral-50);
             outline: 2px solid var(--clr-primary-400);
-            background-color: var(--clr-primary-200);
+            background-color: var(--clr-primary-300);
         }
     }
 
     @at-root #{$button}:active {
-        background-color: var(--clr-primary-300);
+        background-color: var(--clr-primary-200);
     }
 }
 

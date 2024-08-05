@@ -33,5 +33,11 @@ export default class Home {
             this.#controller.refreshContent();
             this.#controller.inbox.render();
         });
+
+        const toggle = document.getElementById('mode-toggle');
+        const body = document.querySelector("body");
+        toggle.addEventListener('change', function (event) {
+            body.classList.toggle("dark-theme");
+        });
     }
 }

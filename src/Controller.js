@@ -35,7 +35,6 @@ export default class Controller {
     }
 
     #seed() {
-        localStorage.clear();
         const projects = DBManager.read("projects");
         if (!projects) {
             DBManager.write("projects", [
@@ -81,7 +80,8 @@ export default class Controller {
         const body = document.querySelector("body");
         const main = document.querySelector("main");
         main.replaceChildren("");
-        body.className = "";
+        body.classList.remove("body--inbox");
+        body.classList.remove("body--toggle");
     }
 
     #enableTransitions() {
