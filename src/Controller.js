@@ -74,6 +74,11 @@ export default class Controller {
                 e.stopPropagation();
             }
         }, { capture: true });
+
+        const toggle = document.getElementById('mode-toggle');
+        toggle.addEventListener('change', function (event) {
+            body.classList.toggle("dark-theme");
+        });
     }
 
     refreshContent() {
