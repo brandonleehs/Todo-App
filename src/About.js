@@ -1,4 +1,10 @@
 export default class About {
+    #controller;
+
+    constructor(controller) {
+        this.#controller = controller;
+    }
+
     render() {
         const main = document.querySelector("main");
         const section = document.createElement("section");

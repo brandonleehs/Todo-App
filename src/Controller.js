@@ -5,12 +5,14 @@ import Project from "./Project.js";
 import Task from "./Task.js";
 import Modal from "./Modal.js";
 import About from "./About.js";
+import Contact from "./Contact.js";
 
 export default class Controller {
     #currentView;
     #viewsMap;
     #home;
     #inbox;
+    #contact;
     #modal;
     #about;
 
@@ -18,21 +20,25 @@ export default class Controller {
         const homeLink = document.querySelector(".navbar__title");
         const inboxLink = document.querySelector(".navbar__inbox");
         const aboutLink = document.querySelector(".navbar__about");
+        const contactLink = document.querySelector(".navbar__contact");
         this.#modal = new Modal(this);
         this.#home = new Home(this);
         this.#inbox = new Inbox(this);
         this.#about = new About(this);
+        this.#contact = new Contact(this);
         this.#viewsMap = new Map();
         this.#viewsMap.set(homeLink, this.#home);
         this.#viewsMap.set(inboxLink, this.#inbox);
         this.#viewsMap.set(aboutLink, this.#about);
+        this.#viewsMap.set(contactLink, this.#contact);
 
         this.#renderDefault();
         this.#enableTransitions();
     }
 
     #renderDefault() {
-        this.#currentView = this.#home;
+        // this.#currentView = this.#home;
+        this.#currentView = this.#contact;
         this.#currentView.render();
         this.#bindEvents();
 
