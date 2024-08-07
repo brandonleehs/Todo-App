@@ -9,6 +9,16 @@ export default class EditModal extends Modal {
     this.#id = id;
   }
 
+  render(type) {
+    super.render(type);
+    if (type === 'task') {
+      const option = document.querySelector(
+        `#priority option[value=${DBManager.readById(this.#id).priority}]`
+      );
+      option.setAttribute('selected', '');
+    }
+  }
+
   _createProject() {
     const blur = document.createElement('div');
     const project = DBManager.readById(this.#id);
