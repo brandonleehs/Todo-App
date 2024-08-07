@@ -7,6 +7,8 @@ import Project from './models/Project.js';
 import Task from './models/Task.js';
 import WindowEvent from './events/WindowEvent.js';
 import Inbox from './views/Inbox.js';
+import About from './views/About.js';
+import Contact from './views/Contact.js';
 
 export default class Controller {
   #viewsMap;
@@ -16,8 +18,12 @@ export default class Controller {
     this.#viewsMap = new Map();
     const home = new Home(this);
     const inbox = new Inbox(this);
+    const about = new About();
+    const contact = new Contact();
     this.#viewsMap.set('home', home);
     this.#viewsMap.set('inbox', inbox);
+    this.#viewsMap.set('about', about);
+    this.#viewsMap.set('contact', contact);
     this.#renderDefault();
     this.#enableTransitions();
   }

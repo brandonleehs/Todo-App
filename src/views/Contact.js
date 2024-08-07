@@ -1,12 +1,15 @@
-export default class Contact {
-  #controller;
+import View from './View';
 
-  constructor(controller) {
-    this.#controller = controller;
+export default class Contact extends View {
+  constructor() {
+    super();
   }
 
   render() {
-    const main = document.querySelector('main');
+    this._main.appendChild(this.#createContent());
+  }
+
+  #createContent() {
     const section = document.createElement('section');
     section.className = 'contact';
     section.innerHTML = `
@@ -25,6 +28,6 @@ export default class Contact {
 
                 <button class="contact__submit" type="submit">Submit</button>
             </form>`;
-    main.appendChild(section);
+    return section;
   }
 }

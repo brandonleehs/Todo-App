@@ -22,8 +22,8 @@ export default class NavbarEvent extends ViewEvent {
     const linkToViewMap = new Map();
     linkToViewMap.set(homeLink, home);
     linkToViewMap.set(inboxLink, inbox);
-    // linkToViewMap.set(aboutLink, about);
-    // linkToViewMap.set(contactLink, contact);
+    linkToViewMap.set(aboutLink, about);
+    linkToViewMap.set(contactLink, contact);
 
     for (const [link, view] of linkToViewMap.entries()) {
       link.addEventListener('click', () => {
