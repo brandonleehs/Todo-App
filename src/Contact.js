@@ -1,15 +1,15 @@
 export default class Contact {
-    #controller;
+  #controller;
 
-    constructor(controller) {
-        this.#controller = controller;
-    }
+  constructor(controller) {
+    this.#controller = controller;
+  }
 
-    render() {
-        const main = document.querySelector("main");
-        const section = document.createElement("section");
-        section.className = "contact";
-        section.innerHTML = `
+  render() {
+    const main = document.querySelector('main');
+    const section = document.createElement('section');
+    section.className = 'contact';
+    section.innerHTML = `
         <form action="POST" class="contact__form">
                 <p class="contact__title">Contact us</p>
   
@@ -25,6 +25,6 @@ export default class Contact {
 
                 <button class="contact__submit" type="submit">Submit</button>
             </form>`;
-        main.appendChild(section);
-    }
+    main.appendChild(section);
+  }
 }
