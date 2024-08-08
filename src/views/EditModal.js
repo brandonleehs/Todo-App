@@ -62,9 +62,12 @@ export default class EditModal extends Modal {
                 <select name="projects" id="projects" value="">
                     ${options}
                 </select>
-                <label for="task-title">Title</label>
-                <input type="text" name="task-Title" id="task-title" maxlength="40" value="${task.title}" required />
-
+                <div class="form-group">
+                  <label for="task-title">Title</label>
+                  <input type="text" name="task-Title" id="task-title" maxlength="40" value="${task.title}" required />
+                  <span class="error">Title is required.</span>
+                </div>
+                
                 <label for="duedate">Duedate</label>
                 <input type="date" id="duedate" name="duedate" value="${task.dueDate}" min="2024-08-03" max="2030-01-01" />
 

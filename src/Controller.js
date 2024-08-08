@@ -19,7 +19,7 @@ export default class Controller {
     const home = new Home(this);
     const inbox = new Inbox(this);
     const about = new About();
-    const contact = new Contact();
+    const contact = new Contact(this);
     this.#viewsMap.set('home', home);
     this.#viewsMap.set('inbox', inbox);
     this.#viewsMap.set('about', about);

@@ -13,8 +13,11 @@ export default class CreateModal extends Modal {
         <form action="" class="modal__form" tabindex="0">
             <p class="modal__title">New Project</p>
 
-            <label for="project-title">Title</label>
-            <input type="text" name="project-title" id="project-title" maxlength="40" required />
+            <div class="form-group">
+              <label for="project-title">Title</label>
+              <input autofocus type="text" name="project-title" id="project-title" maxlength="40" required />
+              <span class="error">Title is required.</span>
+              </div>
 
             <label for="note">Note:</label>
             <textarea id="note" name="note" rows="5" cols="33"></textarea>
@@ -44,8 +47,12 @@ export default class CreateModal extends Modal {
                 <select name="projects" id="projects">
                     ${options}
                 </select>
-                <label for="task-title">Title</label>
-                <input type="text" name="task-Title" id="task-title" maxlength="40" required />
+
+                <div class="form-group">
+                  <label for="task-title">Title</label>
+                  <input autofocus type="text" name="task-Title" id="task-title" maxlength="40" required />
+                  <span class="error">Title is required.</span>
+                </div>
 
                 <label for="duedate">Duedate</label>
                 <input type="date" id="duedate" name="duedate" value="${this._getCurrentDate()}" min="2024-01-01" max="2030-01-01" />

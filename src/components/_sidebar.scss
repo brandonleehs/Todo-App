@@ -1,124 +1,124 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 @mixin sidebar-button-styles {
-    @media (hover:hover) {
-        &:hover {
-            outline: 2px solid var(--clr-primary-400);
-            background-color: var(--clr-primary-200);
-        }
+  @media (hover: hover) {
+    &:hover {
+      outline: 2px solid var(--clr-primary-400);
+      background-color: var(--clr-primary-200);
     }
+  }
 
-    &:active {
-        font-weight: $fw-bold;
-        background-color: var(--clr-primary-300);
-    }
+  &:active {
+    font-weight: $fw-bold;
+    background-color: var(--clr-primary-300);
+  }
 }
 
 .sidebar__toggle {
-    --toggle-padding: var(--padding);
+  --toggle-padding: var(--padding);
 
-    @media only screen and (max-width: 630px) {
-        --toggle-padding: 1rem;
-    }
+  @media only screen and (max-width: 630px) {
+    --toggle-padding: 1rem;
+  }
 
-    position: absolute;
-    top: var(--toggle-padding);
-    right: var(--toggle-padding);
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+  position: absolute;
+  top: var(--toggle-padding);
+  right: var(--toggle-padding);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 
-    svg {
-        fill: var(--clr-neutral-500);
-    }
+  svg {
+    fill: var(--clr-neutral-500);
+  }
 }
 
 .sidebar {
-    --layout-gap: 1rem;
-    --content-padding: .25rem;
-    --padding: 1rem;
-    --width: 240px;
-    --border-radius: .5rem;
+  --layout-gap: 1rem;
+  --content-padding: 0.25rem;
+  --padding: 1rem;
+  --width: 240px;
+  --border-radius: 0.5rem;
 
-    background-color: var(--clr-neutral-200);
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    transform: none;
-    width: var(--width);
-    overflow: hidden;
+  background-color: var(--clr-neutral-200);
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: var(--width);
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+
+  &.hide {
+    transform: translateX(-100%);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--layout-gap);
+    padding: var(--padding);
+    width: 100%;
     height: 100%;
-    transition: transform 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+  }
 
-    &.hide {
-        transform: translateX(-100%);
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0;
+
+    @include button-state-styles(&);
+
+    svg {
+      fill: var(--clr-neutral-500);
     }
+  }
 
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: var(--layout-gap);
-        padding: var(--padding);
-        width: 100%;
-        height: 100%;
+  [class*='title'] {
+    font-weight: $fw-bold;
+  }
+
+  &__title {
+    font-size: $fs-700;
+    text-align: center;
+  }
+
+  &__add {
+    display: grid;
+  }
+
+  &__add button {
+    color: inherit;
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: var(--content-padding);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    @include sidebar-button-styles;
+
+    svg {
+      fill: var(--clr-neutral-600);
     }
+  }
 
-    &__close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        padding: 0;
+  &__projects > *,
+  &__tasks > * {
+    padding: var(--content-padding);
+  }
 
-        @include button-state-styles(&);
+  li {
+    cursor: pointer;
+    position: relative;
 
-        svg {
-            fill: var(--clr-neutral-500);
-        }
-    }
-
-    [class*="title"] {
-        font-weight: $fw-bold;
-    }
-
-    &__title {
-        font-size: $fs-700;
-        text-align: center;
-    }
-
-    &__add {
-        display: grid;
-    }
-
-    &__add button {
-        color: inherit;
-        display: inline-flex;
-        gap: .5rem;
-        align-items: center;
-        padding: var(--content-padding);
-        border-radius: var(--border-radius);
-        cursor: pointer;
-
-        @include sidebar-button-styles;
-
-        svg {
-            fill: var(--clr-neutral-600);
-        }
-    }
-
-    &__projects>*,
-    &__tasks>* {
-        padding: var(--content-padding);
-    }
-
-    li {
-        cursor: pointer;
-        position: relative;
-
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        border-radius: var(--border-radius);
-        @include sidebar-button-styles;
-    }
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: var(--border-radius);
+    @include sidebar-button-styles;
+  }
 }

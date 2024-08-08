@@ -1,12 +1,17 @@
+import ContactEvent from '../events/ContactEvent';
 import View from './View';
 
 export default class Contact extends View {
-  constructor() {
+  #contactEvent;
+
+  constructor(controller) {
     super();
+    this.#contactEvent = new ContactEvent(controller);
   }
 
   render() {
     this._main.appendChild(this.#createContent());
+    this.#contactEvent.bindEventAll();
   }
 
   #createContent() {
