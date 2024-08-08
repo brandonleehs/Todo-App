@@ -13,7 +13,7 @@ export default class HomeEvent extends ViewEvent {
       const controller = this._controller;
       const inbox = controller.viewsMap.get('inbox');
       controller.refreshContent();
-      controller.inbox.render();
+      inbox.render();
       controller.currentView = inbox;
     });
   }
