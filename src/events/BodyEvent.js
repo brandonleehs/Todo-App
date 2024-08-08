@@ -7,6 +7,7 @@ export default class BodyEvent extends ViewEvent {
 
   bindEventAll() {
     this.#bindBody();
+    this.#bindContactLink();
   }
 
   #bindBody() {
@@ -28,5 +29,19 @@ export default class BodyEvent extends ViewEvent {
       },
       { capture: true }
     );
+  }
+
+  #bindContactLink() {
+    const contactLink = document.querySelector('.contact-link');
+
+    contactLink.addEventListener('click', () => {
+      const controller = this._controller;
+      const contact = controller.viewsMap.get('contact');
+      if (controller.currentView != contact) {
+        controller.refreshContent();
+        contact.render();
+        controller.currentView = contact;
+      }
+    });
   }
 }
