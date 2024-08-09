@@ -23,13 +23,23 @@ export default class ModalEvent extends ViewEvent {
 
     addButton &&
       addButton.addEventListener('click', (e) => {
-        if (this.#id) DBManager.deleteById(this.#id);
         if (this.#checkValidation()) {
-          if (addButton.getAttribute('data-type') === 'task') {
-            this.#addTask();
+          if (this.#id) {
+            const selectors = `.modal__form select, 
+            .modal__form input,
+            .modal__form textarea`;
+            const values = Array.from(document.querySelectorAll(selectors)).map(
+              (el) => el.value
+            );
+            DBManager.updateById(this.#id, values);
           } else {
-            this.#addProject();
+            if (addButton.getAttribute('data-type') === 'task') {
+              this.#addTask();
+            } else {
+              this.#addProject();
+            }
           }
+
           e.preventDefault();
           Event.emit('itemChanged');
           document.querySelector('.blur').remove();
@@ -89,6 +99,7 @@ export default class ModalEvent extends ViewEvent {
     for (const value of values) {
       if (!value) return false;
     }
+
     return true;
   }
 }

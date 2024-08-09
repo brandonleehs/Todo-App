@@ -5,7 +5,7 @@ export default class EditModal extends Modal {
   #id;
 
   constructor(controller, id) {
-    super(controller);
+    super(controller, id);
     this.#id = id;
   }
 
@@ -28,11 +28,14 @@ export default class EditModal extends Modal {
         <form action="" class="modal__form" tabindex="0">
             <p class="modal__title">Edit Project</p>
 
-            <label for="project-title">Title</label>
-            <input type="text" name="project-title" id="project-title" maxlength="40" required value="${project.title}"/>
+            <div class="form-group form-group--input">
+              <label for="project-title">Title</label>
+              <input type="text" name="project-title" id="project-title" maxlength="40" required value="${project.title}"/>
+              <span class="error">Title is required.</span>
+              </div>
 
             <label for="note">Note:</label>
-            <textarea value="${project.description}" id="note" name="note" rows="5" cols="33"></textarea>
+            <textarea id="note" name="note" rows="5" cols="33">${project.description}</textarea>
 
             <button class="modal__add" type="submit">Save changes</button>
             <button class="modal__cancel" type="button">Cancel</button>
@@ -62,7 +65,7 @@ export default class EditModal extends Modal {
                 <select name="projects" id="projects" value="">
                     ${options}
                 </select>
-                <div class="form-group">
+                <div class="form-group form-group--input">
                   <label for="task-title">Title</label>
                   <input type="text" name="task-Title" id="task-title" maxlength="40" value="${task.title}" required />
                   <span class="error">Title is required.</span>

@@ -1,3 +1,6 @@
+import Project from './models/Project';
+import Task from './models/Task';
+
 export default class DBManager {
   static readById(id) {
     return DBManager.storageHandler(
@@ -11,6 +14,33 @@ export default class DBManager {
       () => this.#deleteById(id),
       DBManager.throwStorageError
     );
+  }
+
+  static updateById(id, values) {
+    return DBManager.storageHandler(
+      () => this.#updateById(id, values),
+      DBManager.throwStorageError
+    );
+  }
+
+  static #updateById(id, values) {
+    if (!DBManager.readById(id).projectId) {
+      const updated = new Project(...values).toJSON();
+      const project = { ...updated, id };
+
+      DBManager.deleteById(id);
+      const arr = DBManager.read('projects');
+      arr.push(project);
+      DBManager.write('projects', arr);
+    } else {
+      const updated = new Task(...values).toJSON();
+      const task = { ...updated, id };
+
+      DBManager.deleteById(id);
+      const arr = DBManager.read('tasks');
+      arr.push(task);
+      DBManager.write('tasks', arr);
+    }
   }
 
   static #readById(id) {

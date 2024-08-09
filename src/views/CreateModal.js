@@ -13,7 +13,7 @@ export default class CreateModal extends Modal {
         <form action="" class="modal__form" tabindex="0">
             <p class="modal__title">New Project</p>
 
-            <div class="form-group">
+            <div class="form-group form-group--input">
               <label for="project-title">Title</label>
               <input autofocus type="text" name="project-title" id="project-title" maxlength="40" required />
               <span class="error">Title is required.</span>
@@ -43,12 +43,15 @@ export default class CreateModal extends Modal {
     blur.innerHTML = `<dialog class="modal">
             <form action="POST" class="modal__form" tabindex="0">
                 <p class="modal__title">New Task</p>
-                <label for="projects">Project</label>
-                <select name="projects" id="projects">
-                    ${options}
-                </select>
+                <div class="form-group form-group--select">
+                  <label for="projects">Project</label>
+                  <select name="projects" id="projects" required>
+                        ${options}
+                  </select>
+                  <span class="error">At least one project is required.</span>
+                </div>
 
-                <div class="form-group">
+                <div class="form-group form-group--input">
                   <label for="task-title">Title</label>
                   <input autofocus type="text" name="task-Title" id="task-title" maxlength="40" required />
                   <span class="error">Title is required.</span>

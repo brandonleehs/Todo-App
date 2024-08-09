@@ -79,15 +79,6 @@
       align-self: end;
     }
 
-    input:not(:focus):invalid {
-      color: var(--clr-error);
-      border: 1px solid var(--clr-error);
-    }
-
-    input {
-      grid-column: 1 / -1;
-    }
-
     .error {
       grid-row: 1;
       grid-column: 2;
@@ -99,8 +90,29 @@
     }
   }
 
-  .form-group > :not(:focus):invalid + .error {
-    display: block;
+  .form-group--select {
+    select {
+      grid-column: 1 / -1;
+    }
+
+    & > :invalid + .error {
+      display: block;
+    }
+  }
+
+  .form-group--input {
+    input {
+      grid-column: 1 / -1;
+    }
+
+    input:not(:focus):invalid {
+      color: var(--clr-error);
+      border: 1px solid var(--clr-error);
+    }
+
+    & > :not(:focus):invalid + .error {
+      display: block;
+    }
   }
 
   input,

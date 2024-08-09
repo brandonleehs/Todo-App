@@ -42,14 +42,13 @@ export default class Controller {
     ) {
       document.querySelector('body').classList.add('dark-theme');
     }
-    // To be removed after adding a way to clear projects
     DBManager.clear();
     this.#seed();
   }
 
   #seed() {
     const projects = DBManager.read('projects');
-    if (!projects) {
+    if (!projects || !projects.length) {
       DBManager.write('projects', [
         new Project(
           'General',
