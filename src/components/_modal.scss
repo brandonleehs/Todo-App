@@ -57,7 +57,7 @@
   border-radius: 1rem;
   padding: 1rem;
   color: var(--clr-neutral-600);
-  width: 100%;
+  width: max-content;
 
   &__form {
     display: grid;
@@ -109,6 +109,10 @@
   &__cancel {
     padding: var(--input-padding);
     border-radius: var(--input-border-radius);
+  }
+
+  select {
+    min-width: 0;
   }
 
   option[value='none'] {
