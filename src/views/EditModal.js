@@ -69,7 +69,7 @@ export default class EditModal extends Modal {
                 </div>
                 
                 <label for="duedate">Duedate</label>
-                <input type="date" id="duedate" name="duedate" value="${task.dueDate}" min="2024-08-03" max="2030-01-01" />
+                <input type="date" id="duedate" name="duedate" value="${task.dueDate}" min="${task.dueDate}" max="2030-01-01" />
 
                 <label for="priority">Priority
                     <select name="priority" id="priority">

@@ -55,7 +55,7 @@ export default class CreateModal extends Modal {
                 </div>
 
                 <label for="duedate">Duedate</label>
-                <input type="date" id="duedate" name="duedate" value="${this._getCurrentDate()}" min="2024-01-01" max="2030-01-01" />
+                <input type="date" id="duedate" name="duedate" value="${this._getCurrentDate()}" min="${this._getCurrentDate()}" max="2030-01-01" />
 
                 <label for="priority">Priority
                     <select name="priority" id="priority">
