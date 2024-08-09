@@ -42,7 +42,6 @@ export default class Controller {
     ) {
       document.querySelector('body').classList.add('dark-theme');
     }
-    DBManager.clear();
     this.#seed();
   }
 
