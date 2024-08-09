@@ -25,12 +25,20 @@ export default class InboxEvent extends ViewEvent {
   }
 
   #bindDeleteButton() {
-    const deleteButtonList = document.querySelectorAll('.inbox__delete');
+    const deleteButtonList = document.querySelectorAll(
+      `.inbox__project [class*='__delete']`
+    );
 
     for (const deleteButton of deleteButtonList) {
       deleteButton.addEventListener('click', () => {
         const id = deleteButton.parentNode.parentNode.getAttribute('data-id');
-
+        if (!DBManager.readById(id).projectId) {
+          DBManager.read('tasks').forEach((task) => {
+            if (task.projectId === id) {
+              DBManager.deleteById(task.id);
+            }
+          });
+        }
         DBManager.deleteById(id);
         Event.emit('itemChanged');
       });
@@ -40,14 +48,20 @@ export default class InboxEvent extends ViewEvent {
   #bindInfoButton() {
     const body = document.querySelector('body');
     const sidebar = document.querySelector('.sidebar');
-    const infoButtonList = document.querySelectorAll('.inbox__info');
+    const infoButtonList = document.querySelectorAll(
+      `.inbox__project [class*='__info']`
+    );
 
     for (const infoButton of infoButtonList) {
       infoButton.addEventListener('click', () => {
         const id = infoButton.parentNode.parentNode.getAttribute('data-id');
 
         const modal = new EditModal(this._controller, id);
-        modal.render('task');
+        if (DBManager.readById(id).projectId) {
+          modal.render('task');
+        } else {
+          modal.render('project');
+        }
 
         if (window.vw <= 992) {
           sidebar.classList.add('hide');

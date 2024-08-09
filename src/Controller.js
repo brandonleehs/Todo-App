@@ -60,7 +60,7 @@ export default class Controller {
         new Task(
           DBManager.read('projects')[0].id,
           'Grocery Shopping',
-          '2024-08-03',
+          `${new Date().toISOString().split('T')[0]}`,
           'medium',
           "Buy groceries for the week, including fruits, vegetables, dairy products, and household essentials. Don't forget to check for any special offers or discounts."
         ),

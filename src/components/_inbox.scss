@@ -1,77 +1,90 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 .inbox {
-    min-height: 65vh;
-    display: grid;
-    justify-items: center;
+  min-height: 65vh;
+  display: grid;
+  justify-items: center;
 
-    &__project {
-        --content-gap: .5rem;
-        --padding: .5rem 1rem;
-        --layout-gap: .5rem;
+  &__project {
+    --content-gap: 0.5rem;
+    --padding: 0.5rem 1rem;
+    --layout-gap: 0.5rem;
 
-        display: flex;
-        flex-direction: column;
-        gap: var(--layout-gap);
-        padding: 1rem;
-        width: min(75%, 600px);
-        text-align: center;
-        background-color: var(--clr-neutral-200);
-        border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--layout-gap);
+    padding: 1rem;
+    width: min(75%, var(--picture-max-width));
+    text-align: center;
+    background-color: var(--clr-neutral-200);
+    border-radius: 1rem;
 
-        svg {
-            fill: var(--clr-neutral-500);
+    svg {
+      fill: var(--clr-neutral-500);
 
-            @include button-state-styles(&);
-        }
+      @include button-state-styles(&);
     }
+  }
 
-    &__project-title {
-        font-size: $fs-700;
-        font-weight: $fw-bold;
-    }
+  button {
+    padding: 0;
+    min-width: 1rem;
+  }
 
-    &__buttons {
-        display: flex;
-        gap: var(--content-gap);
-    }
+  .project-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: var(--content-gap);
+    align-self: center;
+
+    max-width: calc(min(100vw, 600px) - 7rem);
+  }
+
+  &__project-title {
+    font-size: $fs-700;
+    font-weight: $fw-bold;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--content-gap);
+  }
 }
 
 .inbox__task {
-    border-radius: 1rem;
-    padding: var(--padding);
-    background-color: var(--clr-primary-200);
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
+  border-radius: 1rem;
+  padding: var(--padding);
+  background-color: var(--clr-primary-200);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--content-gap);
+  width: 100%;
+
+  .flex-wrap {
+    max-width: calc(100% - 2.5rem);
+
+    display: flex;
     gap: var(--content-gap);
-    width: 100%;
+    align-items: center;
 
-    .flex-wrap {
-        max-width: calc(100% - 2.5rem);
-
-        display: flex;
-        gap: var(--content-gap);
-        align-items: center;
-
-        span {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        span.checked {
-            text-decoration: line-through;
-        }
+    span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    button {
-        padding: 0;
-        min-width: 1rem;
+    span.checked {
+      text-decoration: line-through;
     }
+  }
 
-    @include priority-style("none");
-    @include priority-style("low");
-    @include priority-style("medium");
-    @include priority-style("high");
+  @include priority-style('none');
+  @include priority-style('low');
+  @include priority-style('medium');
+  @include priority-style('high');
 }

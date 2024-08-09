@@ -1,74 +1,75 @@
-@use "abstracts" as *;
-@use "components";
+@use 'abstracts' as *;
+@use 'components';
 
 .no-transition,
 .no-transition * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-    transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
 
 body {
-    --padding: 2rem;
-    --overlay: rgba(0, 0, 0, 0.4);
+  --padding: 2rem;
+  --overlay: rgba(0, 0, 0, 0.4);
+  --picture-max-width: 600px;
 
-    background-color: var(--clr-neutral-100);
-    color: var(--clr-neutral-600);
-    font-size: $fs-400;
+  background-color: var(--clr-neutral-100);
+  color: var(--clr-neutral-600);
+  font-size: $fs-400;
 
+  &.body--toggle {
+    margin-left: 240px;
+  }
+
+  &.body--inbox {
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  @media only screen and (max-width: 992px) {
     &.body--toggle {
-        margin-left: 240px;
+      margin-left: 0;
     }
 
-    &.body--inbox {
-        transition: margin-left 0.3s ease-in-out;
+    &.body--toggle::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: var(--overlay);
     }
-
-    @media only screen and (max-width: 992px) {
-        &.body--toggle {
-            margin-left: 0;
-        }
-
-        &.body--toggle::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            background-color: var(--overlay);
-        }
-    }
+  }
 }
 
 button {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .navbar ul,
 .sidebar ul {
-    padding: 0;
-    list-style-type: none;
+  padding: 0;
+  list-style-type: none;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .contact-link {
-    padding: var(--padding);
-    font-weight: $fw-bold;
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
+  padding: var(--padding);
+  font-weight: $fw-bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 
-    svg {
-        fill: var(--clr-neutral-500);
-    }
+  svg {
+    fill: var(--clr-neutral-500);
+  }
 }
