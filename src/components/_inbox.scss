@@ -32,12 +32,19 @@
   }
 
   .project-wrapper {
+    --margin-inline-wrapper: 8rem;
+
+    @media (min-width: 400px) {
+      --margin-inline-wrapper: 12rem;
+    }
+
     display: flex;
     justify-content: center;
     gap: var(--content-gap);
     align-self: center;
 
-    max-width: calc(min(100vw, 600px) - 8rem);
+    max-width: calc(min(100vw, 600px) - var(--margin-inline-wrapper));
+    min-width: 0;
   }
 
   &__project-title {
@@ -66,7 +73,8 @@
   width: 100%;
 
   .flex-wrap {
-    max-width: calc(100% - 2.5rem);
+    max-width: calc(min(100vw, 600px) - 7rem);
+    min-width: 0;
 
     display: flex;
     gap: var(--content-gap);

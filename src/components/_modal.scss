@@ -38,6 +38,11 @@
   height: 100%;
   backdrop-filter: blur(2px);
   transform: translate3d(0, 0, 0);
+  backface-visibility: none;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
 }
 
 .modal {
