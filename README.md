@@ -1,6 +1,6 @@
 # Todo-App
 
-A minimalist and efficient SPA todo app to help you stay organized and productive.
+A minimalist and efficient SPA todo app to help you stay organized and productive. Deployed on [github pages](https://brandonleehs.github.io/Todo-App/dist/index.html).
 
 **Built with:**
 
